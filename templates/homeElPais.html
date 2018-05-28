@@ -1,0 +1,19 @@
+<html>
+ <head>
+  <meta charset="UTF-8"/>
+  <title>Simple Application flask | El País</title>
+ </head>
+ <body>
+  {% if show_news %}
+   <h1>Headlines</h1>
+   <h2>Titulares de El Pais</h2>
+    {% for new in news %}
+     <b><a href="{{new.link}}">{{new.title}}</a></b><br />
+     <p>{{new.summary}}</p>
+     <hr />
+    {% endfor %}
+  {% endif %}
+ </body>
+</html>
+
+
