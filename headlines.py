@@ -32,26 +32,20 @@ articles['cnn'] = feedparser.parse(RSS_FEED['cnn'])['entries'][:5]
 articles['abc'] = feedparser.parse(RSS_FEED['abc'])['entries'][:5]
 articles['elm'] = feedparser.parse(RSS_FEED['elm'])['entries'][:5]
 
-
 @app.route("/imagenes")
 def get_imagenes():
   ns={"Atom" : "http://www.w3.org/2005/Atom"}
   parser=etree.XMLParser()
   tree=etree.parse(urllib2.urlopen('https://api.flickr.com/services/feeds/photos_public.gne?tags=sevilla'),parser)
   images = tree.xpath('//Atom:entry/Atom:title', namespaces=ns)
-  return render_template("home.html", images=images)
+  return render_template("homeSevilla.html", images=images)
 
 @app.route("/elpais")
 def get_elpais():
   new = []
   url = 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
   news = feedparser.parse(url)['entries']
-  return render_template("home1.html", news=news)
-
-
-@app.route("/")
-def get_news():
-  return render_template("home.html", articles=articles,titles=Titles)
+  return render_template("homeElPais.html", news=news)
 
 if __name__ == '__main__':
   app.run(port=5300,debug=True)
